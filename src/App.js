@@ -7,7 +7,6 @@ import BG3 from './assets/bg3.jpg';
 
 function App() {
 
-  //jfd
   return (
     <>
       <Header
