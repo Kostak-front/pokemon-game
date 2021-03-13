@@ -1,23 +1,30 @@
 import classes from './Layout.module.css';
 
-const Layout = (props) => {
-   console.log(props.urlBg)
+const Layout = ({ title, urlBg, colorBg, children }) => {
+   const sectionStyle = {}
+
+   if (urlBg) {
+      sectionStyle.backgroundImage = `url(${urlBg}`
+   }
+
+   if (colorBg) {
+      sectionStyle.background = colorBg
+   }
+
    return (
-      <>
-         <section className={classes.root} >
-            <div className={classes.wrapper} style={{ backgroundImage: `${props.urlBg}`, background: `${props.colorBg}` }}>
-               <article>
-                  <div className={classes.title}>
-                     <h3>{props.title}</h3>
-                     <span className={classes.separator}></span>
-                  </div>
-                  <div className={[classes.desc, classes.full].join('')}>
-                     <p>{props.desc}</p>
-                  </div>
-               </article>
-            </div>
-         </section>
-      </>
+      <section className={classes.root} style={sectionStyle}>
+         <div className={classes.wrapper}>
+            <article>
+               <div className={classes.title}>
+                  <h3>{title}</h3>
+                  <span className={classes.separator}></span>
+               </div>
+               <div className={`${classes.desc} ${classes.full}`}>
+                  {children}
+               </div>
+            </article>
+         </div>
+      </section>
    )
 }
 
