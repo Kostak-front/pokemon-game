@@ -1,4 +1,5 @@
 import classes from './Layout.module.css';
+import cn from 'classnames';
 
 const Layout = ({ title, urlBg, colorBg, children }) => {
    const sectionStyle = {}
@@ -19,7 +20,7 @@ const Layout = ({ title, urlBg, colorBg, children }) => {
                   <h3>{title}</h3>
                   <span className={classes.separator}></span>
                </div>
-               <div className={`${classes.desc} ${classes.full}`}>
+               <div className={cn(classes.desc, classes.full)}>
                   {children}
                </div>
             </article>
