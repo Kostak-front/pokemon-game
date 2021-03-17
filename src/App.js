@@ -6,17 +6,19 @@ const App = () => {
   const [page, setPage] = useState('home');
 
   const handleChangeButton = () => {
-    setPage('game');
-  }
-  const handleButtonClick = () => {
-    setPage('home');
+
+    if (page === 'home') {
+      setPage('game');
+    } else if (page === 'game') {
+      setPage('home');
+    }
   }
 
   switch (page) {
     case "home":
       return <HomePage onChangePage={handleChangeButton} />
     case "game":
-      return <GamePage onButtonClick={handleButtonClick} />
+      return <GamePage onButtonClick={handleChangeButton} />
     default:
       return <HomePage />
   }
