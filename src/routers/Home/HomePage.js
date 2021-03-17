@@ -9,7 +9,7 @@ import Data from '../../myData/myData.json';
 import MenuHeader from '../../components/MenuHeader/MenuHeader';
 
 
-const HomePage = ({ onChangePage, onPageChange }) => {
+const HomePage = ({ onChangePage }) => {
    let pokemonsData = [...Data]
 
    const handleClickButton = () => {
