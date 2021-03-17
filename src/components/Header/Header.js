@@ -1,6 +1,9 @@
 import classes from './Header.module.css';
 
-const Header = ({ title, desc }) => {
+const Header = ({ title, desc, onClickButton }) => {
+   const handleClick = () => {
+      onClickButton && onClickButton()
+   }
 
    return (
       <header className={classes.root}>
@@ -8,6 +11,9 @@ const Header = ({ title, desc }) => {
          <div className={classes.container}>
             <h1>{title}</h1>
             <p>{desc}</p>
+            <button onClick={handleClick}>
+               Start GAME
+            </button>
          </div>
       </header>
    )
