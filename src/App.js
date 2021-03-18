@@ -1,27 +1,17 @@
 import { useState } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import HomePage from './routers/Home/HomePage';
 import GamePage from './routers/Game/GamePage';
 
 const App = () => {
-  const [page, setPage] = useState('home');
-
-  const handleChangeButton = () => {
-
-    if (page === 'home') {
-      setPage('game');
-    } else if (page === 'game') {
-      setPage('home');
-    }
-  }
-
-  switch (page) {
-    case "home":
-      return <HomePage onChangePage={handleChangeButton} />
-    case "game":
-      return <GamePage onButtonClick={handleChangeButton} />
-    default:
-      return <HomePage />
-  }
-}
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path="/home" component={HomePage} />
+        <Route path="/game" component={GamePage} />
+      </Switch>
+    </BrowserRouter>
+  )
+};
 
 export default App;

@@ -1,14 +1,19 @@
-const GamePage = ({ onButtonClick }) => {
-   const onButtonClic = () => {
-      console.log('GamePage');
-      onButtonClick && onButtonClick();
+import MenuHeader from "../../components/MenuHeader/MenuHeader";
+
+const GamePage = ({ onChangePage }) => {
+   const onButtonClic = (page) => {
+      console.log(page)
+      onChangePage && onChangePage();
    }
 
    return (
-      <div>
-         <h1>THIS IS PAGE OF THE GAME</h1>
-         <button onClick={onButtonClic} >Back to home</button>
-      </div>
+      <>
+         <MenuHeader />
+         <div >
+            <h1>THIS IS PAGE OF THE GAME</h1>
+            <button onClick={onButtonClic} >Back to home</button>
+         </div>
+      </>
    )
 }
 

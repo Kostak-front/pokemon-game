@@ -1,8 +1,9 @@
 import classes from './Header.module.css';
 
 const Header = ({ title, desc, onClickButton }) => {
-   const handleClick = () => {
-      onClickButton && onClickButton()
+   const handleClick = (page) => {
+      console.log(page)
+      onClickButton && onClickButton(page)
    }
 
    return (
