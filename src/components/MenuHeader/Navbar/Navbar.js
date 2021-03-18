@@ -1,23 +1,17 @@
 import classes from './Navbar.module.css';
 import cn from 'classnames';
 
-const Navbar = ({ active, sActive, onClick }) => {
-
-   const onButtonClic = () => {
-      console.log('navbar');
-      sActive(!active)
-      onClick && onClick();
-   }
+const Navbar = ({ isOpen, bgActive = false, onClickBurger }) => {
 
    return (
-      <nav id={classes.navbar}>
+      <nav id={classes.navbar} className={cn({ [classes.bgActive]: bgActive })}>
          <div className={classes.navWrapper}>
             <p className={classes.brand}>
                LOGO
             </p>
-            <a className={cn(classes.menuButton, { [classes.deactive]: !active, [classes.active]: active })} onClick={onButtonClic}>
+            <div className={cn(classes.menuButton, { [classes.active]: isOpen })} onClick={onClickBurger}>
                <span />
-            </a>
+            </div>
          </div>
       </nav>
    )

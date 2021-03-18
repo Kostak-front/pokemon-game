@@ -12,9 +12,8 @@ import MenuHeader from '../../components/MenuHeader/MenuHeader';
 const HomePage = ({ onChangePage }) => {
    let pokemonsData = [...Data]
 
-   const handleClickButton = () => {
-      console.log('tututu')
-      onChangePage && onChangePage();
+   const handleClickButton = (page) => {
+      onChangePage && onChangePage(page);
    }
 
 
