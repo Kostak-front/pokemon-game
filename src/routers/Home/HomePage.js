@@ -3,28 +3,16 @@ import Layout from '../../components/Layout/Layput';
 import Footer from '../../components/Footer/Footer';
 import BG2 from '../../assets/bg2.jpg';
 import BG1 from '../../assets/bg1.jpg';
-import PokemonCard from '../../components/PokemonCard/PokemonCard';
 import classes from './Home.module.css';
-import Data from '../../myData/myData.json';
-import MenuHeader from '../../components/MenuHeader/MenuHeader';
 
 
-const HomePage = ({ onChangePage }) => {
-   let pokemonsData = [...Data]
-
-   const handleClickButton = () => {
-      console.log('tututu')
-      onChangePage && onChangePage();
-   }
-
+const HomePage = () => {
 
    return (
       <>
-         <MenuHeader />
          <Header
             title="This is props.title"
             desc="This is props.description!"
-            onClickButton={handleClickButton}
          />
          <Layout
             id="rules"
@@ -41,9 +29,6 @@ const HomePage = ({ onChangePage }) => {
             colorBg="#e2e2e2"
          >
             <div className={classes.flex}>
-               {
-                  pokemonsData.map(item => <PokemonCard key={item.id} name={item.name} img={item.img} id={item.id} type={item.type} values={item.values} />)
-               }
             </div>
          </Layout>
          <Layout
@@ -55,7 +40,6 @@ const HomePage = ({ onChangePage }) => {
             Each player has five cards in a hand and the aim is to capture the opponent's cards by turning them into the player's own color of red or blue.</p>
             <p>To win, a majority of the total ten cards played (including the one card that is not placed on the board) must be of the player's card color. To do this, the player must capture cards by placing a card adjacent to an opponent's card whereupon the 'ranks' of the sides where the two cards touch will be compared. If the rank of the opponent's card is higher than the player's card, the player's card will be captured and turned into the opponent's color. If the player's rank is higher, the opponent's card will be captured and changed into the player's color instead. </p>
          </Layout>
-         <Footer />
       </>
    );
 }
