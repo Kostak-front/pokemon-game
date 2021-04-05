@@ -1,14 +1,20 @@
-import { useHistory } from 'react-router-dom';
-import { useState } from 'react';
-import PokemonCard from '../../components/PokemonCard/PokemonCard';
-import myData from '../../myData/myData.json'
 
-const POKEMONS = JSON.parse(JSON.stringify(myData))
+import { useState, useEffect } from 'react';
+import PokemonCard from '../../components/PokemonCard/PokemonCard';
+import classes from './GamePage.module.css'
+
+import database from '../../service/firebase'
+
 
 const GamePage = () => {
-   const history = useHistory()
-   const [isActive, setActive] = useState(null)
-   const [pokemon, setPokemon] = useState(POKEMONS)
+
+   const [pokemons, setPokemons] = useState({})
+
+   // useEffect(() => {
+   //    database.ref('pokemons').once('value', (snapshot) => {
+   //       setPokemons(snapshot.val())
+   //    })
+   // }, [])
 
    // const handleCardClick = (id) => {
    //    setPokemon([...pokemon, id])
@@ -20,37 +26,54 @@ const GamePage = () => {
    // console.log(pokemonsData)
 
    const handleCardClick = (id) => {
-      setActive(prevState => !prevState);
 
-      setPokemon(prevState => prevState.map(item => {
-         if (item.id === id) {
-            item.active = true
-         }
+      setPokemons(prevState => {
+         return Object.entries(prevState).reduce((acc, item) => {
+            const pokemon = { ...item[1] };
+            if (pokemon.id === id) {
+               console.log(pokemon);
+               pokemon.active = true;
+               console.log(pokemon.active)
+            };
 
-         console.log(item.active)
-      }))
+            acc[item[0]] = pokemon;
 
-      console.log(pokemon)
-      console.log(myData)
+            return acc;
+         }, {});
+      });
+
+      // setPokemons(prevState => {
+      //    return Array.from(prevState, (item) => {
+      //       if (item.id === id) {
+      //          item.active = true
+      //       }
+      //       return item
+      //    });
+      // })
    }
 
-
    const handleClick = () => {
-      history.push('/')
+      return console.log('activateCards')
    }
 
    return (
       <div>
          <h1>THIS IS PAGE OF THE GamePage</h1>
-         <div>
+         <button onClick={handleClick} >SHOW CARDS</button>
+         <div className={classes.flex}>
             {
-               pokemon.map(item => <PokemonCard
-                  key={item.id}
-                  name={item.name}
-                  img={item.img} id={item.id} type={item.type} values={item.values} isActive={item.active} handleClick={handleCardClick} />)
+               Object.entries(pokemons).map(([key, { name, id, img, type, values, active }]) => <PokemonCard
+                  key={key}
+                  name={name}
+                  img={img}
+                  id={id}
+                  type={type}
+                  values={values}
+                  isActive={active}
+                  handleClick={handleCardClick} />)
             }
          </div>
-         <button onClick={handleClick} >Back to home</button>
+
       </div>
    )
 }
